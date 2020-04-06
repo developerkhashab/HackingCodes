@@ -16,6 +16,7 @@ def process_sniffed_packet(packet):
             for keyword in keywords:
                 if keyword in load:
                     print(load)
+                    break
 
 
 sniff("eth0")
