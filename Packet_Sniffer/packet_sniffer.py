@@ -13,6 +13,9 @@ def process_sniffed_packet(packet):
         if packet.haslayer(scapy.Raw):
             load = packet[scapy.Raw].load
             keywords = ['email', 'username', 'user', 'login', 'password', 'pass']
+            for keyword in keywords:
+                if keyword in load:
+                    print(load)
 
 
 sniff("eth0")
