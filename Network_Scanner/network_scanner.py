@@ -33,3 +33,6 @@ option = get_arguments()
 scan_results = scan(option.target)
 print_result(scan_results)
 # '10.0.2.0/24'
+
+# this file will simply send arp request on the whole network
+# to ask  every one about his IP and MAC address for further attacks.
