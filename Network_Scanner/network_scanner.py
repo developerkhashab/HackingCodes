@@ -3,13 +3,16 @@ import argparse
 import scapy.all as scapy
 
 
+# take IP argument to scan all connected devices
 def get_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--target", dest="target", help="Target IP / IP range.")
     options = parser.parse_args()
     return options
 
-
+# broadcasting request to get answer from each one
+# with his IP and his mac for further attack
+# and putting it in object
 def scan(ip):
     arp_request = scapy.ARP(pdst=ip)
     broadcast = scapy.Ether(dst='ff:ff:ff:ff:ff:ff')
@@ -22,7 +25,7 @@ def scan(ip):
         clients_list.append(clients_dic)
     return clients_list
 
-
+# printing object in table form in terminal
 def print_result(results_list):
     print('IP\t\t\t AT MAC \n************************************************')
     for client in results_list:
