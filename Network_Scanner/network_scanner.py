@@ -10,6 +10,7 @@ def get_arguments():
     options = parser.parse_args()
     return options
 
+
 # broadcasting request to get answer from each one
 # with his IP and his mac for further attack
 # and putting it in object
@@ -24,6 +25,7 @@ def scan(ip):
         clients_dic = {'ip': element[1].psrc, 'mac': element[1].hwsrc}
         clients_list.append(clients_dic)
     return clients_list
+
 
 # printing object in table form in terminal
 def print_result(results_list):

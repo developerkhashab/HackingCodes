@@ -4,6 +4,7 @@ import subprocess
 import optparse
 import re
 
+
 # take two argument, the interface that you want to change
 # and the new mac address that you want to give
 def get_arguments():
@@ -12,12 +13,14 @@ def get_arguments():
     parser.add_option('-m', '--mac', dest='new_mac', help='new mac address')
     return parser.parse_args()
 
+
 # changing mac address
 def change_mac(interface, new_mac):
     print('[+] Changing mac address for ' + interface + ' to ' + new_mac)
     subprocess.call(['ifconfig', interface, 'down'])
     subprocess.call(['ifconfig', interface, 'hw', 'ether', new_mac])
     subprocess.call(['ifconfig', interface, 'up'])
+
 
 # function name is clear :p
 def get_current_mac(interface):

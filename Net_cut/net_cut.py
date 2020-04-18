@@ -3,13 +3,13 @@ import netfilterqueue
 
 
 def process_packet(packet):
-    #just printing the packet
+    # just printing the packet
     print(packet)
 
     # accepting packet
     packet.accept()
 
-    #you can drop the packet with if/else like if it's unwanted site
+    # you can drop the packet with if/else like if it's unwanted site
     # you access the packet by scapy then the ip layer and check website
     # packet.drop()
 

