@@ -8,7 +8,7 @@ def process_packet(packet):
     # loading  packet with scapy
     scapy_packet = scapy.IP(packet.get_payload())
 
-    # check scapy packet if it has dns request
+    # check scapy packet if it has dns response
     if scapy_packet.haslayer(scapy.DNSRR):
         qname = scapy_packet[scapy.DNSQR].qname
 
