@@ -9,8 +9,9 @@ def set_load(packet,load):
     del packet[scapy.IP].len
     del packet[scapy.IP].chksum
     del packet[scapy.TCP].chksum
+    return packet
 
-# processing packet for further changes, like now we are redirecting to another IP
+# processing packet for further changes, like now we are redirecting download to another download location
 def process_packet(packet):
     # loading  packet with scapy
     scapy_packet = scapy.IP(packet.get_payload())

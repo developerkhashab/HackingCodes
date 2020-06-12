@@ -1,0 +1,21 @@
+[2020-06-01 16:00:49.172] [sharedprocess] [info] main {"machineId":"f2ec7bd38d88a57e9a7b74deb3e527d61d9e0309660a698d797300e7082182af","windowId":2}
+[2020-06-01 16:00:49.388] [sharedprocess] [error] [File Watcher (node.js)] Error: ENOENT: no such file or directory, stat '/home/kali/Desktop/hackingCourse/~/.vscode-root/User/snippets'
+[2020-06-01 16:01:29.207] [sharedprocess] [info] Starting to clean up unused language packs.
+[2020-06-01 16:01:50.415] [sharedprocess] [info] Installing extension: ms-python.python
+[2020-06-01 16:02:23.087] [sharedprocess] [info] Installing extension: kiteco.kite
+[2020-06-01 16:02:24.749] [sharedprocess] [info] Installing extension: tht13.python
+[2020-06-01 16:02:39.746] [sharedprocess] [info] Downloaded extension: tht13.python /tmp/20f663e5-309c-444c-9d7c-aa5bb8209578
+[2020-06-01 16:02:40.429] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.tht13.python-0.2.3: tht13.python
+[2020-06-01 16:02:40.430] [sharedprocess] [info] Renamed to /root/.vscode/extensions/tht13.python-0.2.3
+[2020-06-01 16:02:40.431] [sharedprocess] [info] Installation completed. tht13.python
+[2020-06-01 16:02:40.463] [sharedprocess] [info] Extensions installed successfully: tht13.python
+[2020-06-01 16:02:44.623] [sharedprocess] [info] Downloaded extension: kiteco.kite /tmp/902a441f-7919-4bfa-b1ea-64e0f5a45495
+[2020-06-01 16:02:45.113] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.kiteco.kite-0.114.0: kiteco.kite
+[2020-06-01 16:02:45.115] [sharedprocess] [info] Renamed to /root/.vscode/extensions/kiteco.kite-0.114.0
+[2020-06-01 16:02:45.118] [sharedprocess] [info] Installation completed. kiteco.kite
+[2020-06-01 16:02:45.211] [sharedprocess] [info] Extensions installed successfully: kiteco.kite
+[2020-06-01 16:09:31.447] [sharedprocess] [info] Downloaded extension: ms-python.python /tmp/59225895-4f8f-46c4-b93a-bdd3198f8229
+[2020-06-01 16:09:39.629] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.ms-python.python-2020.5.80290: ms-python.python
+[2020-06-01 16:09:39.629] [sharedprocess] [info] Renamed to /root/.vscode/extensions/ms-python.python-2020.5.80290
+[2020-06-01 16:09:39.641] [sharedprocess] [info] Installation completed. ms-python.python
+[2020-06-01 16:09:39.692] [sharedprocess] [info] Extensions installed successfully: ms-python.python
