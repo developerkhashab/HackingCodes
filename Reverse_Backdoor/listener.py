@@ -16,20 +16,20 @@ class Listener:
 
     def reliable_send(self, data):
         json_data = json.dumps(data)
-        self.connection.send(json_data)
+        self.connection.send(json_data.encode())
 
     def reliable_receive(self):
-        json_data = ""
+        json_data = b""
         while True:
             try:
-                json_data = json_data + self.connection.recv(1024).decode()
+                json_data = json_data + self.connection.recv(1024)
                 return json.loads(json_data)
             except ValueError:
                 continue
 
     def execute_remotely(self, command):
-        self.connection.reliable_send(command.encode())
-        return self.connection.reliable_receive(1024)
+        self.reliable_send(command)
+        return self.reliable_receive()
 
     def run(self):
         while True:
