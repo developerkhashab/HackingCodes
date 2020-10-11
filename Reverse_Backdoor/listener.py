@@ -35,7 +35,7 @@ class Listener:
         while True:
             command = input(">> ")
             result = self.execute_remotely(command)
-            print(result.decode("utf-8"))
+            print(result)
 
 
 # nc -vv -l -p 4444
